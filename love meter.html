@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Meter</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff9a9e, #fecfef);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+        }
+
+        .meter-container {
+            display: none;
+            margin-top: 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .meter-container h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+            font-family: 'Georgia', serif;
+        }
+
+        .meter {
+            width: 200px;
+            height: 30px;
+            background: #eee;
+            border-radius: 20px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .meter span {
+            display: block;
+            height: 100%;
+            background: #ff69b4;
+            border-radius: 20px;
+            position: absolute;
+            top: 0;
+            left: -100%;
+            animation: fillMeter 3s ease-out forwards;
+        }
+
+        @keyframes fillMeter {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .meter-container .result {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        #inputName1, #inputName2 {
+            padding: 12px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: 2px solid #ff69b4;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        #submitButton {
+            padding: 12px 25px;
+            font-size: 20px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #submitButton:hover {
+            background-color: #ff1493;
+        }
+
+        #continueButton {
+            padding: 12px 25px;
+            font-size: 20px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        #continueButton:hover {
+            background-color: #ff1493;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to the Love Meter</h1>
+    <p>Enter the names and check how strong the love is!</p>
+
+    <input type="text" id="inputName1" placeholder="Enter the first name" />
+    <input type="text" id="inputName2" placeholder="Enter the second name" />
+    <button id="submitButton">Check Love</button>
+
+    <div class="meter-container" id="meterContainer">
+        <h2>Love Meter</h2>
+        <div class="meter">
+            <span id="meterFill"></span>
+        </div>
+        <div class="result" id="loveResult"></div>
+    </div>
+
+    <button id="continueButton" onclick="window.location.href='final.html'">Tap Here to Continue</button>
+
+    <script>
+        document.getElementById("submitButton").addEventListener("click", function() {
+            var name1 = document.getElementById("inputName1").value;
+            var name2 = document.getElementById("inputName2").value;
+
+            if (name1 && name2) {
+                // Ensure love score is always above 90%
+                var loveScore = Math.floor(Math.random() * 10) + 90; // Will generate a value between 90 and 99
+                var loveText = loveScore >= 90 ? "You two are meant to be!" : "There's something special!";
+
+                // Show the meter with animation
+                document.getElementById("meterContainer").style.display = "block";
+                document.getElementById("meterFill").style.animation = "fillMeter 3s ease-out forwards";
+                document.getElementById("meterFill").style.width = loveScore + "%";
+                document.getElementById("loveResult").innerHTML = `The love score between ${name1} and ${name2} is: ${loveScore}%<br><strong>${loveText}</strong>`;
+
+                // Show the "Tap Here to Continue" button
+                document.getElementById("continueButton").style.display = "inline-block";
+            } else {
+                alert("Please enter both names!");
+            }
+        });
+    </script>
+
+</body>
+</html>

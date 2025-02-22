@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day ❤️</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffebf0;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        h1 {
+            color: #e60073;
+            margin-top: 50px;
+        }
+        .heart {
+            font-size: 60px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .heart:hover {
+            transform: scale(1.3);
+        }
+        .hidden-message {
+            display: none;
+            color: #ff3366;
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .quiz, .slideshow, .continue-button {
+            display: none;
+            margin-top: 30px;
+        }
+        button {
+            background-color: #e60073;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #c4005d;
+        }
+
+        .slideshow {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 30px;
+        }
+
+        .slideshow img {
+            width: 400px;
+            height: 350px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Happy Valentine's Day, My love! ❤️</h1>
+    <p>Click the heart below for a surprise!</p>
+
+    <div class="container">
+        <div class="heart" onclick="showMessage()">❤️</div>
+        <p class="hidden-message" id="message">You're the love of my life! 💖</p>
+    </div>
+
+    <div class="quiz" id="quiz">
+        <h2>How well do you know us? 💘</h2>
+        <p>When we first meet?</p>
+        <button onclick="checkAnswer('Ismilepur')">Ismilepur</button>
+        <button onclick="checkAnswer('Daulatpur')">Daulatpur</button>
+        <button onclick="checkAnswer('Nadi ka pull')">Nadi ka pull</button>
+        <p id="quiz-result"></p>
+    </div>
+
+    <div class="slideshow" id="slideshow">
+        <h2>Our Beautiful Moments 💑</h2>
+        <img src="https://assets.onecompiler.app/438mteb7q/439umbv52/IMG-20250210-WA0044.jpg" id="slide1">
+        <img src="https://assets.onecompiler.app/438mteb7q/439umbv52/IMG-20250210-WA0067.jpg" id="slide2">
+        </div>
+
+    <div class="continue-button" id="continueButton">
+        <button onclick="continueSurprise()">Tap Here to Continue</button>
+    </div>
+
+    <script>
+        let audio = new Audio('romantic-music.mp3');
+
+        function showMessage() {
+            let message = document.getElementById("message");
+            message.style.display = "block";
+            setTimeout(() => { message.style.opacity = 1; }, 200);
+            
+            audio.play();
+            audio.loop = true;
+
+            setTimeout(() => {
+                document.getElementById("quiz").style.display = "block";
+            }, 3000);
+
+            setTimeout(() => {
+                document.getElementById("slideshow").style.display = "flex";
+                startSlideshow();
+            }, 5000);
+
+            setTimeout(() => {
+                document.getElementById("continueButton").style.display = "block";
+            }, 7000);
+        }
+
+        function checkAnswer(answer) {
+            let result = document.getElementById("quiz-result");
+            if (answer === 'Ismilepur') {
+                result.innerHTML = "Correct! That was the best day ever! 💕";
+                result.style.color = "green";
+            } else {
+                result.innerHTML = "Oops! Try again. 😜";
+                result.style.color = "red";
+            }
+        }
+
+        function startSlideshow() {
+            document.getElementById("slideshow").style.display = "flex";
+
+            let slides = ["slide1", "slide2",];
+            let index = 0;
+
+            function showNextSlide() {
+                slides.forEach(id => document.getElementById(id).style.display = "none");
+                document.getElementById(slides[index]).style.display = "block";
+                index = (index + 1) % slides.length;
+                setTimeout(showNextSlide, 3000);
+            }
+
+            showNextSlide();
+        }
+
+        function continueSurprise() {
+            window.location.href = "love meter.html"; // Redirects to next.html
+        }
+    </script>
+
+</body>
+</html>
